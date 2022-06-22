@@ -1,0 +1,15 @@
+# /usr/lib/systemd/system/falcon_share.service
+[Unit]
+Description=Falcon_share (python WSGI)
+After=network.target
+
+[Service]
+Type=forking
+WorkingDirectory = /var/local/falcon_share
+PrivateTmp = true
+Restart = on-failure
+PIDFile = /var/local/Falcon_FileSharer/service/gunicorn.pid
+ExecStart = /var/local/Falcon_FileSharer/venv/bin/gunicorn --config /var/local/Falcon_FileSharer/gunicorn_conf.py App_falconShare:app
+
+[Install]
+WantedBy=multi-user.target
