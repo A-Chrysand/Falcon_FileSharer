@@ -29,7 +29,7 @@ app.add_route(server_conf.nginx_static + 'jsGet/potato/clientip', GetClientIP())
 app.add_route(server_conf.nginx_static + 'jsGet/share/filetree', JsGetFileTree())
 app.add_static_route(server_conf.nginx_static + 'share/file/', os.getcwd() + "/files/share/", True)
 app.add_route(server_conf.nginx_static + 'jsStream/upload/{parm_status}', FileReceiver())
-if server_conf.enable_static_serve:
+if server_conf.standalone_mode:
 	app.add_static_route(server_conf.nginx_static, os.getcwd() + "/dist/", False)
 	app.add_route(server_conf.nginx_static + 'login', FalconHtml(parm_filename='login.html'))
 	app.add_route(server_conf.nginx_static + 'home', FalconHtml(parm_filename='index.html'))

@@ -5,7 +5,7 @@ After=network.target
 
 [Service]
 Type=forking
-WorkingDirectory = /var/local/falcon_share
+WorkingDirectory = /var/local/Falcon_FileSharer
 PrivateTmp = true
 Restart = on-failure
 PIDFile = /var/local/Falcon_FileSharer/service/gunicorn.pid

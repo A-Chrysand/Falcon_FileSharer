@@ -15,7 +15,7 @@ class AuthenticationCheck:
 		self.check_status = 0
 
 	def process_request(self, req, resp):
-		if server_conf.enable_static_serve and re.search(r'(.html|.css|.js|.map|.woff|.ttf|.ico)$', req.url):
+		if server_conf.standalone_mode and re.search(r'(.html|.css|.js|.map|.woff|.ttf|.ico)$', req.url):
 			self.check_status = user_status.ok
 		elif not re.match(r'\S{0,30}' + server_conf.nginx_static + 'jsPost/auth/login', req.url):
 			# print("Not login page, middleware working")
@@ -52,8 +52,8 @@ class AuthenticationCheck:
 		elif self.check_status == user_status.userNotFound:
 			resp.status = falcon.HTTP_401
 			# print("userNotFound")
-			resp.location = server_conf.nginx_static + "login"
+			resp.location = server_conf.nginx_static + "login/"
 		elif self.check_status == user_status.tokenNotFound:
 			resp.status = falcon.HTTP_401
 			# print("tokenNotFound")
-			resp.location = server_conf.nginx_static + "login"
+			resp.location = server_conf.nginx_static + "login/"
